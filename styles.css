@@ -588,11 +588,10 @@ a{ color:inherit; text-decoration:none; }
 ========================================================= */
 
 .query-console{
-
+    position: relative;
     width:100%;
     max-width:520px;
     margin:0 auto;
-
 }
 
 /* =========================================================
