@@ -1,6 +1,30 @@
 // Progressive enhancement
 document.documentElement.classList.add('js');
 
+const themeToggle = document.querySelector('.theme-toggle');
+const themeToggleIcon = themeToggle?.querySelector('.theme-toggle-icon');
+const savedTheme = window.localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  document.documentElement.classList.add('dark');
+}
+
+function updateThemeButton() {
+  const isDark = document.documentElement.classList.contains('dark');
+  if (!themeToggle) return;
+  themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+  if (themeToggleIcon) themeToggleIcon.textContent = isDark ? '☀️' : '🌙';
+}
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    window.localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    updateThemeButton();
+  });
+}
+
+updateThemeButton();
+
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if (!prefersReduced) {
